@@ -12,6 +12,7 @@ import CompanyCreate from "./components/admin/CompanyCreate";
 import CompanySetup from "./components/admin/CompanySetup";
 import JobCreate from "./components/admin/JobCreate";
 import Applicants from "./components/admin/Applicants";
+import ProtectedRoute from "./components/admin/ProtectedRoute";
 
 const appRouter = createBrowserRouter([
   { path: "/", element: <Home /> },
@@ -21,12 +22,54 @@ const appRouter = createBrowserRouter([
   { path: "/browse", element: <Browse /> },
   { path: "/profile", element: <Profile /> },
   { path: "jobs/description/:id", element: <JobDescription /> },
-  { path: "/admin/jobs", element: <AdminJobs /> },
-  { path: "/admin/companies", element: <AdminCompanies /> },
-  { path: "/admin/company/create", element: <CompanyCreate /> },
-  { path: "/admin/job/create", element: <JobCreate /> },
-  { path: "/admin/company/:id", element: <CompanySetup /> },
-  { path: "/admin/jobs/:id/applicants", element: <Applicants /> },
+  {
+    path: "/admin/jobs",
+    element: (
+      <ProtectedRoute>
+        <AdminJobs />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/companies",
+    element: (
+      <ProtectedRoute>
+        <AdminCompanies />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/company/create",
+    element: (
+      <ProtectedRoute>
+        <CompanyCreate />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/job/create",
+    element: (
+      <ProtectedRoute>
+        <JobCreate />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/company/:id",
+    element: (
+      <ProtectedRoute>
+        <CompanySetup />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/admin/jobs/:id/applicants",
+    element: (
+      <ProtectedRoute>
+        <Applicants />
+      </ProtectedRoute>
+    ),
+  },
 ]);
 
 function App() {
