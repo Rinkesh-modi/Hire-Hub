@@ -1,3 +1,4 @@
+import { Company } from "../models/company.model.js";
 import { Job } from "../models/job.model.js";
 
 //For admin to post job
@@ -76,6 +77,7 @@ export const getAllJobs = async (req, res) => {
     const jobs = await Job.find(query)
       .populate({
         path: "company",
+        select: "name description website location logo",
       })
       .sort({ createdAt: -1 });
     if (!jobs) {
@@ -123,7 +125,10 @@ export const getJobById = async (req, res) => {
 export const getAdminJobs = async (req, res) => {
   try {
     const adminId = req.id;
-    const jobs = await Job.find({ created_by: adminId });
+    const jobs = await Job.find({ created_by: adminId }).populate({
+      path: "company",
+      createdAt: -1,
+    });
     if (!jobs) {
       return res.status(404).json({
         message: "Jobs not found.",

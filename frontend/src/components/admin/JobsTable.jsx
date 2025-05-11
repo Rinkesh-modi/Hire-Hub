@@ -11,7 +11,7 @@ import {
 } from "../ui/table";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 
 const JobsTable = () => {
   // const navigate = useNavigate();
@@ -31,6 +31,7 @@ const JobsTable = () => {
         );
       });
     setFilterJobs(filteredJob);
+    console.log("allAdminJobs", allAdminJobs);
     console.log("filterJob", filterJob);
     console.log("filteredJob", filteredJob);
   }, [allAdminJobs, filterJob]);
