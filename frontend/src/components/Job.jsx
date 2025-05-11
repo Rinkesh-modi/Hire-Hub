@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const Job = ({ job }) => {
   const navigate = useNavigate();
-
+  console.log(job);
   const daysAgoFunction = (date) => {
     const createdAt = new Date(date);
     const currentDate = new Date();
@@ -21,12 +21,12 @@ const Job = ({ job }) => {
             ? "Today"
             : `${daysAgoFunction(job?.createdAt)} days ago`}
         </p>
-        <Button variant="outline" classname="rounded-full" size="icon">
+        <Button variant="outline" className="rounded-full" size="icon">
           <Bookmark />
         </Button>
       </div>
       <div className="flex items-center gap-2 my-2">
-        <Button classname="p-6" variant="outline" size="icon">
+        <Button className="p-6" variant="outline" size="icon">
           <Avatar>
             <AvatarImage className="p-1" src={job?.company?.logo} />
           </Avatar>

@@ -14,7 +14,6 @@ const useGetAllAdminJobs = () => {
         });
         console.log(res);
         if (res.data.success) {
-          console.log("All Jobs", res.data);
           dispatch(setAllAdminJobs(res.data.jobs));
         }
       } catch (error) {

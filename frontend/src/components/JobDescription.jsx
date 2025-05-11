@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSingleJob } from "@/redux/jobSlice";
 import { toast } from "sonner";
 import Navbar from "./shared/Navbar";
+import { use } from "react";
 
 const JobDescription = () => {
   const params = useParams();
@@ -21,6 +22,12 @@ const JobDescription = () => {
     ) || false;
   const [isApplied, setIsApplied] = useState(isInitiallyApplied);
 
+  useEffect(() => {
+    console.log("singleJob?.applications", singleJob);
+    console.log("user?._id", user?._id);
+    console.log("isInitiallyApplied", isInitiallyApplied);
+    console.log("isApplied", isApplied);
+  }, [isInitiallyApplied, isApplied, singleJob?.applications,user?._id]);
   const applyJobHandler = async () => {
     try {
       const res = await axios.get(
