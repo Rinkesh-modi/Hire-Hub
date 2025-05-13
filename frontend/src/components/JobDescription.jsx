@@ -21,13 +21,7 @@ const JobDescription = () => {
       (application) => application.applicant === user?._id
     ) || false;
   const [isApplied, setIsApplied] = useState(isInitiallyApplied);
-
-  useEffect(() => {
-    console.log("singleJob?.applications", singleJob);
-    console.log("user?._id", user?._id);
-    console.log("isInitiallyApplied", isInitiallyApplied);
-    console.log("isApplied", isApplied);
-  }, [isInitiallyApplied, isApplied, singleJob?.applications,user?._id]);
+  
   const applyJobHandler = async () => {
     try {
       const res = await axios.get(

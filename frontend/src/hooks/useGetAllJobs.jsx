@@ -16,7 +16,6 @@ const useGetAllJobs = () => {
             withCredentials: true,
           }
         );
-        console.log(res);
         if (res.data.success) {
           // console.log("useGetAllJobs hook", res.data.jobs);
           dispatch(setAllJobs(res.data.jobs));

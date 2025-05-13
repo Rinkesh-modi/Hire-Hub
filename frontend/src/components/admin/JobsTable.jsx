@@ -31,9 +31,6 @@ const JobsTable = () => {
         );
       });
     setFilterJobs(filteredJob);
-    console.log("allAdminJobs", allAdminJobs);
-    console.log("filterJob", filterJob);
-    console.log("filteredJob", filteredJob);
   }, [allAdminJobs, filterJob]);
 
   return (

@@ -1,13 +1,15 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import getDataUri from "../utils/datauri.js";
+import cloudinary from "../utils/cloudinary.js";
 
 // Controller function to register a new user
 export const register = async (req, res) => {
   try {
     // Extract necessary fields from the request body
     const { fullname, email, phonenumber, password, role } = req.body;
-
+    console.log(fullname, email, phonenumber, password, role);
     // Validate that all required fields are provided
     if (!fullname || !email || !phonenumber || !password || !role) {
       return res.status(400).json({
@@ -15,6 +17,10 @@ export const register = async (req, res) => {
         success: false,
       });
     }
+
+    const file = req.file;
+    const fileUri = getDataUri(file);
+    const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
 
     // Check if a user already exists with the provided email
     const user = await User.findOne({ email });
@@ -36,6 +42,9 @@ export const register = async (req, res) => {
       phonenumber,
       password: hashedPassword,
       role,
+      profile: {
+        profilePhoto: cloudResponse.secure_url,
+      },
     });
 
     // <-remove-optional-> Send success response (optional, consider adding this if missing)

@@ -19,7 +19,6 @@ const Applicants = () => {
           `${APPLICATION_API_END_POINT}/${params.id}/applicants`,
           { withCredentials: true }
         );
-        console.log("res.data.job", res.data.job);
         dispatch(setAllApplicants(res.data.job));
       } catch (error) {
         console.log(error);
